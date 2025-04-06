@@ -14,7 +14,7 @@
 To install and run the DRIA node, execute the following command in the terminal:
 
 ```bash
-curl -O https://raw.githubusercontent.com/TmB0o0/Dria-node/refs/heads/main/guide-en/dria && chmod +x dria && sudo ./dria
+curl -O https://raw.githubusercontent.com/TmB0o0/Dria-node-/refs/heads/main/guide-en/dria && chmod +x dria && sudo ./dria
 ```
 After running this command, the installation process will begin, and you will need to choose a model.
 ## Step 2: Choose the Model
