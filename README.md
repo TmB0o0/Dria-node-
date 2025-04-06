@@ -17,7 +17,7 @@ For users who prefer text instructions, we have prepared a detailed **simple gui
 Additionally, we also offer a **video guide** in English for those who prefer visual explanations.
 
 ## Choose your language: 🌍
-🇬🇧 [English Guide](guide-en/README.md) | 🇷🇺 [Russian Guide](guide-ru/README.md) | 🇪🇸 [Guía en español](guide-es/README.md) | 🇨🇳 [中文指南](guide-zh/README.md) | 🇫🇷 [Guide en français](guide-fr/README.md)
+🇬🇧 [English Guide](guide-en/README.md) | 🇷🇺 [Russian Guide](guide-ru/README.md) | 🇨🇳 [中文指南](guide-zh/README.md) 
 
 ## About the DRIA Project: 💡
 
