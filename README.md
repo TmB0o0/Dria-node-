@@ -4,6 +4,9 @@
 
 This repository provides detailed instructions on how to set up and operate a node for the **DRIA** project. Here you will find both text and video guides to help you understand the process more easily. 🚀
 
+## Choose your language: 🌍
+🇬🇧 [English Guide](guide-en/README.md) | 🇷🇺 [Russian Guide](guide-ru/README.md) | 🇨🇳 [中文指南](guide-zh/README.md) 
+
 ## What is DRIA? 🤔
 
 **DRIA** is an innovative project offering solutions for distributed computing and blockchain technologies. In this guide, you will learn how to set up a node for DRIA and connect it to their network for testing and operation.
@@ -15,9 +18,6 @@ For users who prefer text instructions, we have prepared a detailed **simple gui
 
 ### 🎥 Video Guide:
 Additionally, we also offer a **video guide** in English for those who prefer visual explanations.
-
-## Choose your language: 🌍
-🇬🇧 [English Guide](guide-en/README.md) | 🇷🇺 [Russian Guide](guide-ru/README.md) | 🇨🇳 [中文指南](guide-zh/README.md) 
 
 ## About the DRIA Project: 💡
 
