@@ -1,0 +1,152 @@
+#!/bin/bash
+
+# 定义文本颜色
+WHITE="\033[1;37m"
+RESET="\033[0m"
+GREEN="\033[1;32m"
+CYAN="\033[1;36m"
+YELLOW="\033[1;33m"
+BLUE="\033[1;34m"
+RED="\033[1;31m"
+MAGENTA="\033[1;35m"
+
+# Logo 图标
+logo() {
+    echo -e "  ##  ###  #######  ######   #######  #######  #######  ######   #######  ##  ##   #######  ###### "
+    echo -e "  ### ###  ##   ##  ##  ##   ##       ##         ###    ##  ##     ###    ##  ##   ##       ##  ## "
+    echo -e "  #######  ##   ##  ##  ##   ##       #######    ###    ##  ##     ###    ## ##    ##       ##  ## "
+    echo -e "  ## ####  ##  ###  ### ###  #######       ##    ###    #######    ###    #######  #######  ####### "
+    echo -e "  ##  ###  ##  ###  ### ###  ###      ###  ##    ###    ### ###    ###    ##  ###  ###      ### ### "
+    echo -e "  ##  ###  ##  ###  ### ###  # #      ###  ##    ###    ### ###    ###    ##  ###  # #      ### ### "
+    echo -e "  ##  ###  #######  #######  #######  #######    ###    ### ###  #######  ##  ###  #######  ### ### ${RESET}"
+}
+
+# 安装节点
+install_node() {
+    echo -e "${CYAN}开始安装节点... 🌱${RESET}"
+
+    # 更新系统并安装依赖
+    sudo apt update && sudo apt install -y curl git make jq build-essential gcc unzip wget lz4 aria2 tmux
+
+    # 安装 Dria Launcher（如果未安装）
+    if [ ! -f "/usr/local/bin/dria-launcher" ]; then
+        echo -e "${YELLOW}正在下载并安装 Dria Launcher... 🚀${RESET}"
+        curl -fsSL https://dria.co/launcher | bash
+    else
+        echo -e "${GREEN}Dria Launcher 已安装。✅${RESET}"
+    fi
+
+    # 安装 Ollama（如果未安装）
+    if [ ! -f "/usr/local/bin/ollama" ]; then
+        echo -e "${YELLOW}正在下载并安装 Ollama... 💻${RESET}"
+        curl -fsSL https://ollama.com/install.sh | sh
+    else
+        echo -e "${GREEN}Ollama 已安装。✅${RESET}"
+    fi
+
+    # 启动 tmux 会话并运行节点
+    echo -e "${CYAN}正在启动 tmux 会话以运行节点... 🖥️${RESET}"
+
+    tmux has-session -t dria_node 2>/dev/null
+    if [ $? != 0 ]; then
+        tmux new-session -d -s dria_node
+        tmux send-keys -t dria_node 'dkn-compute-launcher start' C-m
+        echo -e "${GREEN}节点已在新的 tmux 会话中启动。🎉${RESET}"
+    else
+        tmux send-keys -t dria_node 'dkn-compute-launcher start' C-m
+        echo -e "${CYAN}tmux 会话已存在，已发送启动命令。🔄${RESET}"
+    fi
+
+    tmux attach -t dria_node
+    read -p "按回车键返回菜单..." dummy
+    show_menu
+}
+
+# 查看 $DRIA 积分
+check_points() {
+    echo -e "${CYAN}正在查看 $DRIA 积分... 💰${RESET}"
+    dkn-compute-launcher points
+    read -p "按回车键返回菜单..." dummy
+    show_menu
+}
+
+# 手动更新
+update_manually() {
+    echo -e "${YELLOW}正在进行手动更新... 🔄${RESET}"
+    dkn-compute-launcher update
+    read -p "按回车键返回菜单..." dummy
+    show_menu
+}
+
+# 卸载节点
+uninstall_node() {
+    echo -e "${RED}你确定要卸载节点吗？此操作不可恢复！🗑️${RESET}"
+    read -p "输入 'yes' 以确认: " confirm
+    if [ "$confirm" != "yes" ]; then
+        echo -e "${YELLOW}已取消卸载操作。🚫${RESET}"
+        return
+    fi
+
+    tmux has-session -t dria_node 2>/dev/null
+    if [ $? == 0 ]; then
+        echo -e "${CYAN}正在停止节点... ⏹️${RESET}"
+        tmux send-keys -t dria_node 'exit' C-m
+        tmux kill-session -t dria_node
+        echo -e "${GREEN}节点已成功停止。🛑${RESET}"
+    else
+        echo -e "${YELLOW}未检测到运行中的会话，继续卸载。⚡${RESET}"
+    fi
+
+    echo -e "${RED}正在卸载节点... 🗑️${RESET}"
+    dkn-compute-launcher uninstall
+
+    echo -e "${CYAN}正在清理残留文件... 🧹${RESET}"
+    sudo rm -rf /usr/local/bin/dria-launcher
+    sudo rm -rf /usr/local/bin/ollama
+    sudo rm -rf .dria
+
+    echo -e "${GREEN}节点已卸载并清理完成。🎉${RESET}"
+    read -p "按回车键返回菜单..." dummy
+    show_menu
+}
+
+# 查看日志
+view_logs() {
+    echo -e "${BLUE}正在连接 tmux 会话以查看日志... 📜${RESET}"
+    tmux attach -t dria_node
+    read -p "按回车键返回菜单..." dummy
+    show_menu
+}
+
+# 显示主菜单
+show_menu() {
+    clear
+    logo  # 显示 logo
+
+    echo -e "\n${WHITE}╔═══════════════════════════════╗${RESET}"
+    echo -e "${WHITE}║         节点管理菜单         ║${RESET}"
+    echo -e "${WHITE}╚═══════════════════════════════╝${RESET}\n"
+
+    echo -e "${MAGENTA}=====================================${RESET}"
+    echo "请选择操作:"
+    echo -e "${YELLOW}1. 安装节点 🌱${RESET}"
+    echo -e "${GREEN}2. 查看 $DRIA 积分 💰${RESET}"
+    echo -e "${CYAN}3. 手动更新 🔄${RESET}"
+    echo -e "${RED}4. 卸载节点 🗑️${RESET}"
+    echo -e "${BLUE}5. 查看日志 📜${RESET}"
+    echo -e "${MAGENTA}6. 退出 🚪${RESET}"
+    echo -e "${MAGENTA}=====================================${RESET}"
+    read -p "请选择 [1-6]: " choice
+    case $choice in
+        1) install_node ;;
+        2) check_points ;;
+        3) update_manually ;;
+        4) uninstall_node ;;
+        5) view_logs ;;
+        6) exit 0 ;;
+        *) echo -e "${RED}无效的选项，请重试。❌${RESET}"; sleep 2; show_menu ;;
+    esac
+}
+
+# 从菜单开始执行
+show_menu
