@@ -18,6 +18,7 @@ For users who prefer text instructions, we have prepared a detailed **simple gui
 
 ### 🎥 Video Guide:
 Additionally, we also offer a **video guide** in English for those who prefer visual explanations.
+- https://x.com/TmBO0o/status/1908878289206116509
 
 ## About the DRIA Project: 💡
 
