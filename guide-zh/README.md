@@ -14,7 +14,7 @@
 要安装和运行DRIA节点，请在终端中执行以下命令：
 
 ```bash
-curl -O https://raw.githubusercontent.com/TmB0o0/Dria-node/refs/heads/main/guide-zh/dria && chmod +x dria && sudo ./dria
+curl -O https://raw.githubusercontent.com/TmB0o0/Dria-node-/refs/heads/main/guide-zh/dria && chmod +x dria && sudo ./dria
 ```
 运行此命令后，安装过程将开始，您需要选择一个模型。
 
