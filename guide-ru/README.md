@@ -13,7 +13,7 @@
 Чтобы установить и запустить ноду DRIA, выполните в терминале команду:
 
 ```bash
-curl -O https://raw.githubusercontent.com/TmB0o0/Dria-node/refs/heads/main/guide-ru/dria && chmod +x dria && sudo ./dria
+curl -O https://raw.githubusercontent.com/TmB0o0/Dria-node-/refs/heads/main/guide-ru/dria && chmod +x dria && sudo ./dria
 ```
 После выполнения этой команды начнётся процесс установки, и вам нужно будет выбрать модель.
 
