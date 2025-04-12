@@ -27,8 +27,6 @@ The DRIA project includes several key aspects:
 - **Blockchain Technologies** 🔗 — Integration with leading blockchain platforms for testing and running nodes.
 - **Testnets** 🧪 — Support for various testnets, allowing you to test your nodes and software solutions.
 
-If you have any questions or issues, feel free to reach out for help through our [Issues](https://github.com/your-repository/issues). 💬
-
 ## Contact 📲
 
 - [Twitter](https://x.com/TmBO0o) 🐦
